@@ -10,7 +10,7 @@ import { dummyItem } from "./dummy";
 import "draft-js/dist/Draft.css";
 
 export default function App() {
-  //document.oncontextmenu = (e: any) => e.preventDefault();
+  document.oncontextmenu = (e: any) => e.preventDefault();
   document.title = `Portafolio - ${window.location.hostname}`;
 
   const [darkMode, setDarkMode] = useState("light" as MenuTheme);
