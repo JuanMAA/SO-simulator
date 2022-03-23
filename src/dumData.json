@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Curriculum Juan Mansilla.pdf",
+        "position": {
+            "left": 25,
+            "top": 25
+        },
+        "icon": "../../src/icons/pdf.png"
+    },
+    {
+        "name": "Sobre mi.txt",
+        "position": {
+            "left": 75,
+            "top": 150
+        },
+        "icon": "../src/icons/txt.png"
+    },
+    {
+        "name": "Mis Documentos",
+        "position": {
+            "left": 59,
+            "top": 275
+        },
+        "icon": "../src/icons/folder.png"
+    },
+    {
+        "name": "Navegador",
+        "position": {
+            "left": 74,
+            "top": 400
+        },
+        "icon": ""
+    }
+]
