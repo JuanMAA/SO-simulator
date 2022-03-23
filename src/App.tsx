@@ -81,7 +81,6 @@ export default function App() {
                             setItemsNav([...itemsNav, newData]);
                           }
                         } else {
-
                         }
                       }}
                       icon={data.icon}
@@ -93,19 +92,22 @@ export default function App() {
                       index={index}
                       darkMode={darkMode}
                       addItems={(item: any) => {
+                        console.log("item", item);
                         var newData: any = icons.find((data) => {
                           return data.name === item.name;
                         });
-                        newData.hidden = false;
-                        newData.priority = itemsNav.length + 1;
-                        if (
-                          !itemsNav
-                            .map((e: any) => {
-                              return e.name;
-                            })
-                            .includes(newData.name)
-                        ) {
-                          setItemsNav([...itemsNav, newData]);
+                        if (item !== undefined && newData !== undefined) {
+                          newData.hidden = false;
+                          newData.priority = itemsNav.length + 1;
+                          if (
+                            !itemsNav
+                              .map((e: any) => {
+                                return e.name;
+                              })
+                              .includes(newData.name)
+                          ) {
+                            setItemsNav([...itemsNav, newData]);
+                          }
                         }
                       }}
                       item={
