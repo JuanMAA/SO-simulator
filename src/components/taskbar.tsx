@@ -1,45 +1,77 @@
-import { Menu, MenuTheme } from "antd";
+import { Col, Menu, Row } from "antd";
 import {
   MenuOutlined,
-  FontSizeOutlined,
-  FontColorsOutlined,
   LogoutOutlined,
   BgColorsOutlined,
-  ZoomInOutlined,
+  CalendarOutlined,
   EyeOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
 import { Clock } from "../class/Clock";
-const { ItemGroup, SubMenu, Item } = Menu;
+import type { RootState } from '../redux/store'
+import { useSelector, useDispatch } from 'react-redux'
+import { setTheme } from '../redux/antDesign/antdSlice'
+import { CSSProperties } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
-  darkMode?: MenuTheme;
   itemsNav?: any;
   icons?: any;
-  setDarkMode: Function;
   hiddenWindows: Function;
 }
 
 export default function Taskbar(data: Props) {
+
+  const { ItemGroup, SubMenu, Item } = Menu;
+  const theme = useSelector((state: RootState) => state.counter.theme);
+  const dispatch = useDispatch();
+
+  const style = {
+    menu: {
+      position: "fixed",
+      bottom: 0,
+      width: "100%"
+    } as CSSProperties,
+    subMenu: {
+      fontSize: 15
+    } as CSSProperties,
+    clock: {
+      right: 0,
+      position: "absolute",
+      paddingRight: 20
+    } as CSSProperties,
+    image: {
+      width: 20,
+      height: 20,
+      marginBottom: 3,
+      marginRight: 5
+    } as CSSProperties
+  };
+
   return (
     <Menu
-      key="menu"
-      selectedKeys={["SubMenu"] as any}
+      key={uuidv4()}
+      selectedKeys={["SubMenu"]}
       mode="horizontal"
-      theme={data.darkMode}
-      style={{
-        position: "fixed",
-        bottom: 0,
-        width: "100%",
-      }}
+      theme={theme}
+      style={style.menu}
     >
       <SubMenu
         key={"sm-1"}
         icon={<MenuOutlined />}
         title="Inicio"
-        style={{ fontSize: 15 }}
+        style={style.subMenu}
       >
         <ItemGroup title="Opciones">
+          <SubMenu
+            key="ig-sm-2"
+            icon={<BgColorsOutlined />}
+            title="Tema"
+          >
+            <Item key="ig-sm-2-item-1">Dark</Item>
+            <Item key="ig-sm-2-item-2">Light</Item>
+            <Item key="ig-sm-2-item-3">Compact</Item>
+          </SubMenu>
           <SubMenu
             key="ig-sm-1"
             icon={<UnorderedListOutlined />}
@@ -49,46 +81,12 @@ export default function Taskbar(data: Props) {
             <Item key="ig-sm-1-item-1">Español</Item>
             <Item key="ig-sm-1-item-2">Ingles</Item>
           </SubMenu>
-          <SubMenu
-            key="ig-sm-2"
-            icon={<BgColorsOutlined />}
-            title="Color"
-            disabled={true}
-          >
-            <Item key="ig-sm-2-item-1">Azul</Item>
-            <Item key="ig-sm-2-item-2">Rojo</Item>
-          </SubMenu>
-          <SubMenu
-            key="ig-sm-3"
-            icon={<ZoomInOutlined />}
-            title="Texto"
-            disabled={true}
-          >
-            <SubMenu
-              key="ig-sm-3-item-sm-1"
-              icon={<FontSizeOutlined />}
-              title="Tamaño"
-            >
-              <Item key="ig-sm-3-item-2">Azul</Item>
-              <Item key="ig-sm-3-item-3">Rojo</Item>
-            </SubMenu>
-            <SubMenu
-              key="ig-sm-3-item-sm-2"
-              icon={<FontColorsOutlined />}
-              title="Tipo Fuente"
-            >
-              <Item key="ig-sm-3-item-4">Azul</Item>
-              <Item key="ig-sm-3-item-5">Rojo</Item>
-            </SubMenu>
-          </SubMenu>
           <Item
             icon={<EyeOutlined />}
             key="ig-sm-3-item-6"
-            onClick={() =>
-              data.setDarkMode(data.darkMode === "dark" ? "light" : "dark")
-            }
+            onClick={() => dispatch(setTheme(theme === "dark" ? "light" : "dark"))}
           >
-            {data.darkMode === "dark" ? "Desactivar" : "Activar"} modo oscuro
+            {theme === "dark" ? "Desactivar" : "Activar"} modo oscuro
           </Item>
           <Item
             icon={<LogoutOutlined />}
@@ -114,17 +112,21 @@ export default function Taskbar(data: Props) {
           <img
             key={"m-img-" + key}
             src={item.icon !== "" ? item.icon : ""}
-            style={{ width: 20, height: 20, marginBottom: 3, marginRight: 5 }}
+            style={style.image}
             alt={"Icono"}
           />
           {item.name}
         </Item>
       ))}
       <div
-        style={{ right: 0, position: "absolute", paddingRight: 20 }}
+        style={style.clock}
         key={"clock"}
       >
-        <Clock />
+        <Row>
+          <Col xs={0} md={24}>
+            <Clock />
+          </Col>
+        </Row>
       </div>
     </Menu>
   );

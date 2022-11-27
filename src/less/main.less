@@ -1,0 +1,93 @@
+@import "~antd/lib/style/themes/default.less";
+@import "~antd/dist/antd.less";
+
+@bgNum: `Math.floor(Math.floor(Math.random() * 3) + 1)`;
+@color-rdm: if((@bgNum = 1), #b8613f, if((@bgNum = 2), #b44b85, #1786a1)); 
+
+@primary-color: @color-rdm; 
+@menu-item-color: rgba(255, 255, 255, 0.178);
+@menu-item-active-bg: white;
+@menu-highlight-color: white;
+
+//@btn-primary-color: @primary-color;
+@btn-primary-bg: rgba(255, 255, 255, 0.123);
+@btn-border-style:none;
+@btn-font-weight: 500;
+
+.ant-btn-primary:focus{
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ant-btn-primary:hover{
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.custom-text {
+  color: @primary-color !important;
+}
+
+.linked-animate-demo-wrapper {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: @primary-color;
+  opacity: 0.95;
+
+}
+
+.linked-animate-demo-box {
+  position: absolute;
+  width: 1280px;
+  height: 600px;
+  display: block;
+  margin: auto;
+}
+
+.linked-animate-demo-block {
+  position: absolute;
+  transition: transform .95s ease;
+}
+
+.linked-animate-demo-block-child {
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.title-text { 
+  font-size: 115px;
+  font-weight: bold;
+  color: white;
+  opacity: 0.8
+}
+
+.subtitle-text { 
+  font-size: 25px;
+  margin-top: -45px;
+  font-weight: bold;
+  color: white;
+}
+
+.floating { 
+  animation-name: floating;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes floating {
+  0% { transform: translate(0,  0px); }
+  50%  { transform: translate(0, 15px); }
+  100%   { transform: translate(0, -0px); }   
+}
+
+@media screen and (max-width: 600px) {
+  .title-text {
+    font-size: 70px;
+  }
+  .subtitle-text{
+    margin-top: -20px;
+    font-size: 20px;
+  }
+}

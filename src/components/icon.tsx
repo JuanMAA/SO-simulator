@@ -1,4 +1,23 @@
+import {
+  LoadingOutlined,
+} from '@ant-design/icons';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { setRefreshItem } from "../redux/antDesign/antdSlice";
+import { Tooltip } from 'antd';
+
 export default function Icon(props: any) {
+
+  const refreshItem: boolean = useSelector((state: RootState) => state.counter.refreshItem);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (refreshItem) {
+      setTimeout(() => dispatch(setRefreshItem(false)), 500)
+    }
+  }, [refreshItem]);
+
   return (
     <div
       hidden={!props.showIcon}
@@ -11,14 +30,16 @@ export default function Icon(props: any) {
         cursor: "move",
         color: "white",
         textShadow: "1px 2px 3px #666",
+        textAlign: "center"
       }}
       onMouseDown={props.onStart}
       onTouchStart={props.onStart}
-      onClick={()=>{
-        props.addItem()
-      }}
+      onClick={() => props.addItem()}
     >
-      <img
+      <div hidden={!refreshItem}>
+        <LoadingOutlined size={2000} style={{ fontSize: 70, paddingBottom: 5 }} />
+      </div>
+      <img hidden={refreshItem}
         src={props.icon !== "" ? props.icon : ""}
         style={{
           width: 70,

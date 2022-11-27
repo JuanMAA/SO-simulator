@@ -21,7 +21,57 @@
             "left": 59,
             "top": 275
         },
-        "icon": "../src/icons/folder.png"
+        "icon": "../src/icons/folder.png",
+        "data": [
+            {
+                "title": "desarrollos laborales",
+                "key": "0-0",
+                "children": [
+                    {
+                        "title": "opciones",
+                        "key": "0-0-0",
+                        "children": [
+                            {
+                                "title": "modulos ofbiz.txt",
+                                "key": "0-0-0-0",
+                                "isLeaf": true
+                            }
+                        ]
+                    },
+                    {
+                        "title": "turbus",
+                        "key": "0-0-1",
+                        "children": [
+                            {
+                                "title": "motor de itineriarios.txt",
+                                "key": "0-0-1-0",
+                                "isLeaf": true
+                            }
+                        ]
+                    },
+                    {
+                        "title": "starken",
+                        "key": "0-0-2",
+                        "children": [
+                            {
+                                "title": "formularios dinamicos.txt",
+                                "key": "0-0-2-0",
+                                "isLeaf": true
+                            },
+                            {
+                                "title": "gestor de contenidos.txt",
+                                "key": "0-0-2-1",
+                                "isLeaf": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "desarrollos personales",
+                "key": "0-1"
+            }
+        ]
     },
     {
         "name": "Navegador",

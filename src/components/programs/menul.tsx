@@ -23,7 +23,6 @@ export default function MenuLeft() {
           Actualizar
         </Item>
         <SubMenu key="sub1" icon={<MailOutlined />} title="Nuevo">
-          <Item key="1">Carpeta</Item>
           <Item key="2">Documento de texto</Item>
         </SubMenu>
         <Item key="7" icon={<MailOutlined />}>

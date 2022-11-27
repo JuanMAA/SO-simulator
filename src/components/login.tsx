@@ -1,27 +1,37 @@
 import React, { useState } from "react";
 import {
+  Affix,
   Avatar,
   Button,
   Col,
+  Dropdown,
   Form,
   Input,
+  Menu,
   Row,
 } from "antd";
 import {
   UserOutlined,
-  LockOutlined,
-  LoginOutlined,
+  ArrowRightOutlined,
   LoadingOutlined,
+  FontSizeOutlined,
+  BgColorsOutlined
 } from "@ant-design/icons";
-import { wallpapers } from "../dummy";
+import { wallpapers } from "../dummy"
+import type { RootState } from '../redux/store'
+import { useSelector, useDispatch } from 'react-redux'
+import { setTheme } from '../redux/antDesign/antdSlice'
 
 interface Props {
   showWindows: Function;
 }
 
 export default function Login(data: Props) {
+
   const [isOpen, setIsOpen] = useState(true as boolean);
   const [loading, setLoading] = useState(true as boolean);
+  const theme = useSelector((state: RootState) => state.counter.theme)
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -30,9 +40,8 @@ export default function Login(data: Props) {
           width: "100%",
           height: "100%",
           position: "fixed",
-          backgroundImage: `url(${
-            wallpapers[Math.floor(Math.random() * 2)].background
-          })`,
+          backgroundImage: `url(${wallpapers[Math.floor(Math.random() * 2)].background
+            })`,
           backgroundSize: "cover",
           //filter: "blur(3px)"
           opacity: !isOpen ? "0" : "1",
@@ -40,12 +49,11 @@ export default function Login(data: Props) {
           animation: "pulse 1.2s ease-in-out",
           visibility: !isOpen ? "hidden" : "visible",
         }}
+      >        <Row
+        style={{
+          height: "100%",
+        }}
       >
-        <Row
-          style={{
-            height: "100%",
-          }}
-        >
           <Col
             hidden={loading}
             xs={24}
@@ -95,39 +103,36 @@ export default function Login(data: Props) {
                 setLoading(false);
                 setTimeout(() => {
                   setIsOpen(false);
-                  //setLoading(true);
                   data.showWindows(true);
                 }, 3000);
               }}
             >
-              <Form.Item name="Usuario">
+              <Form.Item name="Contraseña">
                 <Input
+                  style={{ width: "85%" }}
                   defaultValue={"Invitado"}
                   value={"Invitado"}
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   placeholder="Usuario"
+                  autoFocus
+                  readOnly
                 />
-              </Form.Item>
-              <Form.Item name="Contraseña">
-                <Input
-                  prefix={<LockOutlined className="site-form-item-icon" />}
-                  type="password"
-                  placeholder="Contraseña"
-                />
-              </Form.Item>
-              <div></div>
-              <Form.Item>
-                <Button
-                  block
-                  type="primary"
-                  htmlType="submit"
-                  className="login-form-button"
-                >
-                  <LoginOutlined />
-                  Ingresar
+                <Button type="primary" htmlType="submit"
+                  style={{
+                    width: "15%",
+                    textAlign: "center",
+                    fontWeight: "bold"
+                  }}>
+                  <ArrowRightOutlined />
                 </Button>
               </Form.Item>
             </Form>
+            <div style={{ width: "100%", textAlign: "center", color: "white", fontSize: 14, paddingTop: 10 }}>
+              Created by{" "}
+              <Button type="primary" size="small" shape="round" href="https://www.gabbo.dev" target={"_blank"}>
+                gabbo.dev
+              </Button>
+            </div>
           </Col>
         </Row>
       </div>

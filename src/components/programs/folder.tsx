@@ -1,67 +1,24 @@
-import { Col, Breadcrumb, Tree, Divider } from "antd";
+import { Col, Breadcrumb, Tree, Divider, Row } from "antd";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { setVisibleImage, setVisibleSrc } from "../../redux/antDesign/antdSlice";
+import { dummyItem } from "../../dummy";
+import { RootState } from "../../redux/store";
+import Search from "antd/lib/input/Search";
+import { Input } from "antd";
 
 export default function Folder(props: any) {
+
   const { DirectoryTree } = Tree;
 
-  const treeData = [
-    {
-      title: "desarrollos laborales",
-      key: "0-0",
-      children: [
-        {
-          title: "opciones",
-          key: "0-0-0",
-          children: [
-            {
-              title: "modulos ofbiz.txt",
-              key: "0-0-0-0",
-              isLeaf: true,
-            },
-          ],
-        },
-        {
-          title: "turbus",
-          key: "0-0-1",
-          children: [
-            {
-              title: "motor de itineriarios.txt",
-              key: "0-0-1-0",
-              isLeaf: true,
-            },
-          ],
-        },
-        {
-          title: "starken",
-          key: "0-0-2",
-          children: [
-            {
-              title: "formularios dinamicos.txt",
-              key: "0-0-2-0",
-              isLeaf: true,
-            },
+  const theme: string = useSelector((state: RootState) => state.counter.theme);
+  const dispatch = useDispatch();
 
-            {
-              title: "gestor de contenidos.txt",
-              key: "0-0-2-1",
-              isLeaf: true,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: "desarrollos personales",
-      key: "0-1",
-      //children: [
-      //  {
-      //    title: "reloj control.txt",
-      //    key: "0-1-0",
-      //    isLeaf: true,
-      //  },
-      //],
-    },
-  ];
+  const getColorTheme = (isColor?: boolean, newtheme?: string): object => {
+    const color = (newtheme ? newtheme : theme) !== "dark" && !isColor ? "white" : "#001529";
+    const result = isColor ? { color } : { backgroundColor: color };
+    return result
+  }
 
   return (
     <Col
@@ -84,55 +41,64 @@ export default function Folder(props: any) {
           : true
       }
     >
-      <Breadcrumb
-        style={{
-          color: props.darkMode === "dark" ? "white !important" : "#001529",
-        }}
-      >
-        <Breadcrumb.Item>
-          <HomeOutlined
-            style={{ color: props.darkMode === "dark" ? "white" : "#001529" }}
-          />
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>
-          <UserOutlined
-            style={{ color: props.darkMode === "dark" ? "white" : "#001529" }}
-          />
-          <span
-            style={{ color: props.darkMode === "dark" ? "white" : "#001529" }}
+      <Row>
+        <Col xs={8}>
+          <Breadcrumb
+            style={{
+              color: theme === "dark" ? "white !important" : "#001529",
+            }}
           >
-            Mis Documentos
-          </span>
-        </Breadcrumb.Item>
-        {/*
-        <Breadcrumb.Item>Application</Breadcrumb.Item>
-         */}
-      </Breadcrumb>
+            <Breadcrumb.Item>
+              <HomeOutlined
+                style={{ color: theme === "dark" ? "white" : "#001529" }}
+              />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>
+              <UserOutlined
+                style={{ color: theme === "dark" ? "white" : "#001529" }}
+              />
+              <span
+                style={{ color: theme === "dark" ? "white" : "#001529" }}
+              >
+                {props.item?.name}
+              </span>
+            </Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+      </Row>
       <Divider />
       <div>
         <DirectoryTree
+          className={"dt-" + props.item?.name}
           style={{
-            backgroundColor: props.darkMode === "dark" ? "#001529" : "white",
-            color: props.darkMode === "dark" ? "white" : "#001529",
+            backgroundColor: theme === "dark" ? "#001529" : "white",
+            color: theme === "dark" ? "white" : "#001529",
           }}
           multiple
-          onSelect={(_, n) => {
-            if (
-              !props.itemsNav
-                .map((e: any) => {
-                  return e.name;
-                })
-                .includes(n.node.title)
-            ) {
-              let data: any = {};
-              data.name = n.node.title;
-              props.addItem(data);
+          onSelect={(_: any, n: any) => {
+            if (!n.node.title?.toString().includes(".jpg")) {
+              if (
+                !props.itemsNav
+                  .map((e: any) => {
+                    return e.name;
+                  })
+                  .includes(n.node.title)
+              ) {
+                let data: any = {};
+                data.name = n.node.title;
+                console.log(data)
+                props.addItem(data);
+              }
+            } else {
+              const find = dummyItem.find((e: any) => { return e.name === n.node.title })
+              dispatch(setVisibleImage(true))
+              dispatch(setVisibleSrc(find?.img ?? ""))
             }
           }}
           defaultExpandAll
-          treeData={treeData}
+          treeData={props.item?.files}
         />
       </div>
     </Col>
   );
-}
+} 

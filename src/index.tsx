@@ -1,20 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { ConfigProvider } from "antd";
+import { store } from './redux/store'
+import { Provider } from 'react-redux'
 
 import "./index.css";
 import App from "./App";
 
 import reportWebVitals from "./reportWebVitals";
-import esEs from "antd/es/locale/es_ES";
 import 'antd/dist/antd.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ConfigProvider locale={esEs} >
-      <App />
-    </ConfigProvider>
-  </React.StrictMode>,
+  <Provider store={store} >
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+  </Provider>
+  ,
   document.getElementById("root")
 );
 

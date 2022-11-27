@@ -15,6 +15,7 @@ import gitIcon from "./icons/github.png";
 
 import wallpaper1 from "./wallpapers/wallpaper1.jpg";
 import wallpaper2 from "./wallpapers/wallpaper2.jpg";
+import { DataNode } from "antd/lib/tree";
 
 
 function getIndexNav(txt: string): number {
@@ -34,28 +35,28 @@ function getNavIcon() {
 }
 
 export const dummyItem = [
-  {
-    name: "Curriculum Juan Mansilla.pdf",
-    position: {
-      left: 25,
-      top: 25,
-    },
-    icon: pdfIcon,
-    showIcon: true,
-    dimensions:{
-      width: 1000,
-      height: 450,
-      minWidth: 0,
-      minHeight: 0
-    },
-  },
+  //{
+  //  name: "Curriculum Juan Mansilla.pdf",
+  //  position: {
+  //    left: 25,
+  //    top: 25,
+  //  },
+  //  icon: pdfIcon,
+  //  showIcon: true,
+  //  dimensions:{
+  //    width: 1000,
+  //    height: 450,
+  //    minWidth: 0,
+  //    minHeight: 0
+  //  },
+  //},
   {
     name: "modulos ofbiz.txt",
     icon: txtIcon,
     html: `<p>Desarrollo de modulos para apache <a href="https://ofbiz.apache.org/" target="_blank" rel="noopener"><strong>ERP Apache ofbiz</strong></a></p>
     <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/ThemeSaphir.png/1200px-ThemeSaphir.png" style='width: 100%; heigth: 100%;'  /></p>`,
     showIcon: false,
-    dimensions:{
+    dimensions: {
       width: 1000,
       height: 450,
       minWidth: 0,
@@ -71,7 +72,7 @@ export const dummyItem = [
     <p><img src="https://drive.google.com/uc?id=14uxEP0RqhVwPuO7AyMaauBKOt5O_bdz7" style='width: 100%; heigth: 100%;'  /></p>
     `,
     showIcon: false,
-    dimensions:{
+    dimensions: {
       width: 1000,
       height: 450,
       minWidth: 0,
@@ -89,7 +90,7 @@ export const dummyItem = [
     <p><img src="https://drive.google.com/uc?id=1gl-Z8KAhFBoTqu64eb4R8YlR1hj-LXrI" style='width: 100%; heigth: 100%;'  /></p>
     `,
     showIcon: false,
-    dimensions:{
+    dimensions: {
       width: 1000,
       height: 450,
       minWidth: 0,
@@ -107,7 +108,7 @@ export const dummyItem = [
     <p><img src="https://drive.google.com/uc?id=1lgNtc1bYg7x2rPdbbXGibEH8HVE2yICW" style='width: 100%; heigth: 100%;'  /></p>
     `,
     showIcon: false,
-    dimensions:{
+    dimensions: {
       width: 1000,
       height: 450,
       minWidth: 0,
@@ -119,63 +120,191 @@ export const dummyItem = [
     icon: txtIcon,
     html: "<p>Hola</p>",
     showIcon: false,
-    dimensions:{
+    dimensions: {
       width: 1000,
       height: 450,
       minWidth: 0,
       minHeight: 0
     },
-  },
-  {
-    name: "Recursos.txt",
-    position: {
-      left: 75,
-      top: 150,
-    },
-    icon: txtIcon,
-    showIcon: true,
-    dimensions:{
-      width: 1000,
-      height: 450,
-      minWidth: 0,
-      minHeight: 0,
-    },
-    html: `<p>Listado de Recursos:</p>
-    <ul>
-    <li><a href="https://ant.design/" target="_blank">AntDesign</a></li>
-    <li><a href="https://es.reactjs.org/" target="_blank">React</a></li>
-    </ul>`
   },
   {
     name: "Mis Documentos",
     position: {
-      left: 59,
-      top: 275,
+      left: 60,
+      top: 25,
     },
     icon: folderIcon,
     showIcon: true,
-    dimensions:{
+    dimensions: {
       width: 580,
+      height: 450,
+      minWidth: 0,
+      minHeight: 0
+    },
+    files: [
+      {
+        "title": "desarrollos laborales",
+        "key": "0-0",
+        "children": [
+          {
+            "title": "opciones",
+            "key": "0-0-0",
+            "children": [
+              {
+                "title": "modulos ofbiz.txt",
+                "key": "0-0-0-0",
+                "isLeaf": true
+              }
+            ]
+          },
+          {
+            "title": "turbus",
+            "key": "0-0-1",
+            "children": [
+              {
+                "title": "motor de itineriarios.txt",
+                "key": "0-0-1-0",
+                "isLeaf": true
+              }
+            ]
+          },
+          {
+            "title": "starken",
+            "key": "0-0-2",
+            "children": [
+              {
+                "title": "formularios dinamicos.txt",
+                "key": "0-0-2-0",
+                "isLeaf": true
+              },
+              {
+                "title": "gestor de contenidos.txt",
+                "key": "0-0-2-1",
+                "isLeaf": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "desarrollos personales",
+        "key": "0-1"
+      }
+    ]
+  },
+  {
+    name: "Recursos.txt",
+    position: {
+      left: 70,
+      top: 150,
+    },
+    icon: txtIcon,
+    showIcon: true,
+    dimensions: {
+      width: 580,
+      height: 450,
+      minWidth: 0,
+      minHeight: 0
+    },
+    html: `<p>Listado de Recursos:</p>
+           <ul>
+              <li><a href="https://ant.design/" target="_blank">AntDesign</a></li>
+              <li><a href="https://es.reactjs.org/" target="_blank">React</a></li>
+           </ul>`
+  },
+  {
+    name: "Mis Imagenes",
+    position: {
+      left: 210,
+      top: 25,
+    },
+    icon: folderIcon,
+    showIcon: true,
+    dimensions: {
+      width: 580,
+      height: 450,
+      minWidth: 0,
+      minHeight: 0
+    },
+    files: [
+      {
+        "title": "fondo de Pantalla 2.jpg",
+        "key": "1",
+        "isLeaf": true
+      },
+      {
+        "title": "fondo de Pantalla 1.jpg",
+        "key": "2",
+        "isLeaf": true
+      }
+    ]
+  },
+  //{
+  //  name: "Mis Videos",
+  //  position: {
+  //    left: 350,
+  //    top: 25,
+  //  },
+  //  icon: folderIcon,
+  //  showIcon: true,
+  //  dimensions: {
+  //    width: 580,
+  //    height: 450,
+  //    minWidth: 0,
+  //    minHeight: 0
+  //  },
+  //  files: [
+  //    {
+  //      "title": "fondo de Pantalla 2.jpg",
+  //      "key": "1",
+  //      "isLeaf": true
+  //    },
+  //    {
+  //      "title": "fondo de Pantalla 1.jpg",
+  //      "key": "2",
+  //      "isLeaf": true
+  //    }
+  //  ]
+  //},
+  {
+    name: "Navegador",
+    position: {
+      left: 72,
+      top: 275,
+    },
+    icon: getNavIcon(),
+    showIcon: true,
+    dimensions: {
+      width: 1000,
       height: 450,
       minWidth: 0,
       minHeight: 0
     }
   },
   {
-    name: "Navegador",
-    position: {
-      left: 74,
-      top: 400,
-    },
-    icon: getNavIcon(),
-    showIcon: true,
-    dimensions:{
+    name: "fondo de Pantalla 1.jpg",
+    icon: txtIcon,
+    img: wallpaper1,
+    showIcon: false,
+    dimensions: {
       width: 1000,
       height: 450,
       minWidth: 0,
       minHeight: 0
-    }
-  }
+    },
+  },
+  {
+    name: "fondo de Pantalla 2.jpg",
+    icon: txtIcon,
+    img: wallpaper2,
+    showIcon: false,
+    dimensions: {
+      width: 1000,
+      height: 450,
+      minWidth: 0,
+      minHeight: 0
+    },
+  },
 ];
 
 

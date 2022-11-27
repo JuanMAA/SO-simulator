@@ -1,5 +1,7 @@
 import { Calendar, Popover } from "antd";
 import React from "react";
+import { CalendarOutlined } from "@ant-design/icons";
+import { v4 as uuidv4 } from 'uuid';
 
 export class Clock extends React.Component<any, any> {
   intervalID: any;
@@ -38,8 +40,8 @@ export class Clock extends React.Component<any, any> {
         }
         trigger="hover"
       >
-        <div key={"hora"} style={{ cursor: "pointer" }}>
-          {this.state.time}
+        <div key={uuidv4()} style={{ cursor: "pointer" }}>
+          <CalendarOutlined /> {this.state.time}
         </div>
       </Popover>
     );
